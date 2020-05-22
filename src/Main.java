@@ -13,17 +13,21 @@ import java.nio.file.Paths;
  public class Main {
      public static void main(String[] args) {
          Scanner in = new Scanner(System.in);
+         // chamando objeto criptografar
          Criptografa criptografa = new Criptografa();
          System.out.println("mensagem criptografada: " + criptografa.lerMensagem());
 
-         System.out.println("Descriptografada: " + criptografa.descriptografar());
+         // espaço pra deixar bonitinho
+         System.out.println(" ");
 
-         ArrayList<Character> listaQualquer = criptografa.descriptografar();
+         //Criando ArrayList das letras
+         ArrayList<Character> letrasDescriptografadas = criptografa.descriptografar();
 
-         System.out.println("testando: " + listaQualquer);
+         System.out.print("Mensagem Descriptografada: ");
 
-         for(Character testando: listaQualquer){
-         System.out.print(testando);
+         // pegando letra por letra e populando um ArrayList
+         for(Character mensagemDescriptografada: letrasDescriptografadas){
+         System.out.print(mensagemDescriptografada);
          }
          }
      }

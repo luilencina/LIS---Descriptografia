@@ -43,9 +43,9 @@ public class Criptografa {
 
         // vai pegar o array criptografa mensagem
         // vai ler o metodo do arquivo
-        public Criptografa() {
+       public Criptografa() {
             this.criptografaMensagem = lerMensagem().toUpperCase().toCharArray();
-        }
+       }
 
         public ArrayList<Character> descriptografar () {
             //pegar lista de caracteres (mensagem)
@@ -55,10 +55,6 @@ public class Criptografa {
             ArrayList<Character> listaDeCaracteresDescriptografados = new ArrayList<Character>();
             String stringCaracteres = new String(this.listCriptogafa);
 
-            // criar a variavel antes para poder chamar fora do for 
-            char letraDescriptografada = 0;
-            List listaTodosDescriptografados = null;
-
             // percorrendo o array
             for (char c : listaDeCaracteres) {
                 // deixar em letra maiuscula caso nao houver
@@ -66,12 +62,14 @@ public class Criptografa {
 
                 // posição da letra, ex: A = 0
                 int posicaoLetra = stringCaracteres.indexOf(letraMaiuscula);
-                
+
                 // adicionando a chave na posição da letra EERROO
                 int indiceLetraDescriptografada = (posicaoLetra + key) % 31;
 
                 // letra descriptografada
-                letraDescriptografada = stringCaracteres.charAt(indiceLetraDescriptografada);
+                char letraDescriptografada = stringCaracteres.charAt(indiceLetraDescriptografada);
+
+                //populando array
                 listaDeCaracteresDescriptografados.add(letraDescriptografada);
             } // fim for
 
@@ -80,6 +78,9 @@ public class Criptografa {
              }
 
 
+    }
 
 
-}
+
+
+

@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-public class Criptografa {
+    public class Criptografa {
+
 
     //Metodo para ler o arquivo SecretMessage
     public static String lerMensagem() {
@@ -36,21 +37,6 @@ public class Criptografa {
 
     private char[] criptografaMensagem;
 
-    // chave
-    private int key = 15;
-
-  //  private void testaKey(int key) {
-  //      for (int i = 0; i < 100; i++) {
-    //        this.key = i;
-      //      System.out.println(i);
-        //    String message = "";
-          //  for (char word : criptografaMensagem) {
-            //    message = message + word;
-            //}
-            //System.out.println(message);
-        //}
-
-    //}
 
     // vai pegar o array criptografa mensagem
     // vai ler o metodo do arquivo
@@ -58,16 +44,50 @@ public class Criptografa {
         this.criptografaMensagem = lerMensagem().toUpperCase().toCharArray();
     }
 
-    public ArrayList<Character> descriptografar() {
+    public int acharChave() {
+        // Pegar a mensagem criptografada e separar em palavras (encontrar # e esplitar)
+        // variavéis
+        String criptografa = new String(this.criptografaMensagem);
+        String [] listaPalavras = criptografa.split("#");
+
+        ArrayList<String> palavrasComTamanhoCinco = new ArrayList<String>();
+
+
+        for (String pal : listaPalavras){
+            int tamanho = pal.length();
+            if (tamanho == 6) {
+                palavrasComTamanhoCinco.add(pal);
+            }
+        } // fecha for
+
+        // iniciar varivéis
+        int key = 0;
+        boolean achouChave = false;
+        String[] lista = new String[palavrasComTamanhoCinco.size()];
+        while (!achouChave) {
+            for (String pal : palavrasComTamanhoCinco.toArray(lista)){
+                for (int i = 0; i < 60; i++) {
+                    String palavraDescriptografada = this.descriptografar(pal, key);
+                    if (palavraDescriptografada.equals("PRAZO")) {
+                        key = i;
+                        achouChave = true;
+                        break;
+                    }
+                }
+            }
+        } // fecha while
+        return key;
+    }
+
+    public String descriptografar(String mensagem, int chave){
         //pegar lista de caracteres (mensagem)
-        char[] listaDeCaracteres = this.criptografaMensagem;
+
+        char[] listaDeCaracteres = mensagem.toCharArray();
 
 
         //adicionar eles a um array
         ArrayList<Character> listaDeCaracteresDescriptografados = new ArrayList<Character>();
         String stringCaracteres = new String(this.listCriptogafa);
-
-       listaDeCaracteres = metodoHash(listaDeCaracteres);
 
         // percorrendo o array
         for (char c : listaDeCaracteres) {
@@ -79,35 +99,24 @@ public class Criptografa {
             int posicaoLetra = stringCaracteres.indexOf(letraMaiuscula);
 
             // adicionando a chave na posição da letra EERROO
-            int indiceLetraDescriptografada = (posicaoLetra + key) % 31;
+            int indiceLetraDescriptografada = (posicaoLetra + chave) % 31;
 
             // letra descriptografada
             char letraDescriptografada = stringCaracteres.charAt(indiceLetraDescriptografada);
 
+            // caso houver "#" ele substitui por " "
+            if(c == '#'){
+                letraDescriptografada = ' ';
+            }
             //populando array
             listaDeCaracteresDescriptografados.add(letraDescriptografada);
         } // fim for
 
-        return listaDeCaracteresDescriptografados;
+        String mensagemDescriptografada = listaDeCaracteresDescriptografados.toString();
+        return mensagemDescriptografada;
 
     }
 
-
-    private char[] metodoHash(char[] listaDeCaracteres) {
-        char hash = '#';
-        char[] result = new char[listaDeCaracteres.length];
-
-        for (int i = 0; i < listaDeCaracteres.length; i++) {
-            if (listaDeCaracteres[i] == hash) {
-                listaDeCaracteres[i] = ' ';
-            }
-            else {
-                listaDeCaracteres[i] = listaDeCaracteres[i];
-            }
-            System.out.println("RESULTADO:: " + result);
-        }
-        return result;
-    }
 }
 
 

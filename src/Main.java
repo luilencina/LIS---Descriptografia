@@ -21,14 +21,12 @@ import java.nio.file.Paths;
          System.out.println(" ");
 
          //Criando ArrayList das letras
-         String letrasDescriptografadas = criptografa.descriptografar(criptografa.lerMensagem(), criptografa.acharChave());
+         String letrasDescriptografadas = criptografa.descriptografar(Criptografa.lerMensagem(), criptografa.acharChave());
 
-         System.out.print("Mensagem Descriptografada: ");
+         System.out.println("Mensagem Descriptografada: ");
 
          // pegando letra por letra e populando um ArrayList
-         for(String mensagemDescriptografada: letrasDescriptografadas){
          System.out.print(letrasDescriptografadas);
-         }
         }
      }
 

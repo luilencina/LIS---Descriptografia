@@ -55,7 +55,7 @@ import java.util.Scanner;
 
         for (String pal : listaPalavras){
             int tamanho = pal.length();
-            if (tamanho == 6) {
+            if (tamanho == 5) {
                 palavrasComTamanhoCinco.add(pal);
             }
         } // fecha for
@@ -67,10 +67,12 @@ import java.util.Scanner;
         while (!achouChave) {
             for (String pal : palavrasComTamanhoCinco.toArray(lista)){
                 for (int i = 0; i < 60; i++) {
-                    String palavraDescriptografada = this.descriptografar(pal, key);
+                    String palavraDescriptografada = this.descriptografar(pal, i);
+                    System.out.println(palavraDescriptografada);
                     if (palavraDescriptografada.equals("PRAZO")) {
                         key = i;
                         achouChave = true;
+
                         break;
                     }
                 }
@@ -112,8 +114,11 @@ import java.util.Scanner;
             listaDeCaracteresDescriptografados.add(letraDescriptografada);
         } // fim for
 
-        String mensagemDescriptografada = listaDeCaracteresDescriptografados.toString();
-        return mensagemDescriptografada;
+        StringBuilder builder = new StringBuilder(listaDeCaracteresDescriptografados.size());
+        for(Character ch: listaDeCaracteresDescriptografados) {
+            builder.append(ch);
+        }
+        return builder.toString();
 
     }
 

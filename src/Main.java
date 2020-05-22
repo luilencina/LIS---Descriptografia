@@ -8,28 +8,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 
- public class main {
-     public static void main(String args[]) {
+ public class Main {
+     public static void main(String[] args) {
+         Scanner in = new Scanner(System.in);
+         Criptografa criptografa = new Criptografa();
+         System.out.println("mensagem criptografada: " + criptografa.lerMensagem());
 
-         // achar arquivo SecretMessage
-         File file = new File("SecretMessage.txt");
-         FileReader fileReader = null;
-         // adicionar ele a um novo file
-         try {
-             fileReader = new FileReader(file);
-
-         } // caso arquivo não for encontrado
-          catch (java.io.FileNotFoundException e) {
-             System.out.println("Arquivo não encontrado!");
-         }
-         // escrever arquivo
-         Scanner in = new Scanner(fileReader);
-         // continuar linha x linha
-         while (in.hasNextLine()) {
-             String line = in.nextLine();
-             System.out.println(line);
-         }
-
-
+         System.out.println("teste: " + criptografa.descriptografar() + "aqui");
      }
  }
+
+
